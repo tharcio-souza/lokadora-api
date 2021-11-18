@@ -4,18 +4,21 @@ import br.com.tharcio.lokadoraapi.daos.request.PostUserRequest
 import br.com.tharcio.lokadoraapi.daos.request.PutUserRequest
 import br.com.tharcio.lokadoraapi.daos.response.UserResponse
 import br.com.tharcio.lokadoraapi.services.UserService
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("users")
 class UserController(
     private val userService: UserService
 ) {
 
     @GetMapping
-    fun getAll(): List<UserResponse> {
-        return userService.getAll()
+    fun getAll(@PageableDefault(page = 0, size = 10) pageable:Pageable, @RequestParam name: String?): Page<UserResponse> {
+        return userService.getAll(pageable, name)
     }
 
     @GetMapping("/{id}")
