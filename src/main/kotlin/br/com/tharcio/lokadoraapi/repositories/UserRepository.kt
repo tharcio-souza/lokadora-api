@@ -4,7 +4,9 @@ import br.com.tharcio.lokadoraapi.models.UserModel
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
+import java.util.*
 
 interface UserRepository: JpaRepository<UserModel, Int> {
     fun findByNameContainingIgnoreCase(pageable: Pageable, name: String) : Page<UserModel>
+    fun findByEmail(email: String): Optional<UserModel>
 }
