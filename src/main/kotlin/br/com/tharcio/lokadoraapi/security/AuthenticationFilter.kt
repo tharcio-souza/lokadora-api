@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse
 
 class AuthenticationFilter(
     authenticationManager: AuthenticationManager,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val jwtUtil: JwtUtil
 
 ) : UsernamePasswordAuthenticationFilter(authenticationManager) {
 
@@ -35,8 +36,9 @@ class AuthenticationFilter(
         chain: FilterChain,
         authResult: Authentication
     ) {
-        val id = (authResult.principal as UserCustomDetails).user.id
+        val id = (authResult.principal as UserCustomDetails).user.id!!
 
-        response.addHeader("Authorization", "123456")
+        val token = jwtUtil.generateToken(id)
+        response.addHeader("Authorization", "Bearer $token")
     }
 }

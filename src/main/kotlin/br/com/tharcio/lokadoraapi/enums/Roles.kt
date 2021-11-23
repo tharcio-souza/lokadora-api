@@ -1,6 +1,6 @@
 package br.com.tharcio.lokadoraapi.enums
 
-enum class Profile(val description: String) {
+enum class Roles(val description: String) {
     ADMIN("ADMIN_ROLE"),
     USER("USER_ROLE")
 }

@@ -1,7 +1,7 @@
 package br.com.tharcio.lokadoraapi.models
 
 
-import br.com.tharcio.lokadoraapi.enums.Profile
+import br.com.tharcio.lokadoraapi.enums.Roles
 import javax.persistence.*
 
 
@@ -23,8 +23,8 @@ data class UserModel(
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = Profile::class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Roles::class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = [JoinColumn(name = "user_id")])
-    var roles: Set<Profile>
+    var roles: Set<Roles>
 
 )

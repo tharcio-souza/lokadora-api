@@ -3,7 +3,7 @@ package br.com.tharcio.lokadoraapi.extensions
 import br.com.tharcio.lokadoraapi.daos.request.PostUserRequest
 import br.com.tharcio.lokadoraapi.daos.request.PutUserRequest
 import br.com.tharcio.lokadoraapi.daos.response.UserResponse
-import br.com.tharcio.lokadoraapi.enums.Profile
+import br.com.tharcio.lokadoraapi.enums.Roles
 import br.com.tharcio.lokadoraapi.models.UserModel
 
 fun UserModel.toResponse(): UserResponse {
@@ -20,7 +20,7 @@ fun PostUserRequest.toUserModel(): UserModel {
         name = this.name,
         email = this.email,
         password = this.password,
-        roles = setOf(Profile.USER)
+        roles = setOf(Roles.USER)
     )
 }
 fun PutUserRequest.toUserModel(user: UserModel) : UserModel {
