@@ -15,8 +15,8 @@ class UserDetailsCustomService(
     override fun loadUserByUsername(id: String): UserDetails {
         val user = userRepository.findById(id.toInt()).orElseThrow {
             NotFoundException(
-                InternalErrorCodes.USER_NOT_FOUND.message.format(id),
-                InternalErrorCodes.USER_NOT_FOUND.code
+                InternalErrorCodes.LK_101.message.format(id),
+                InternalErrorCodes.LK_101.code
             )
         }
 

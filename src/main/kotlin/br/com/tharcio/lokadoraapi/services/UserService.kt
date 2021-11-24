@@ -20,11 +20,15 @@ class UserService(
 ) {
 
     fun getAll(pageable: Pageable, name: String?): Page<UserResponse> {
+
         name?.let {
-            return userRepository.findByNameContainingIgnoreCase(pageable, name).map { it.toResponse() }
+            val pageResponse = userRepository.findByNameContainingIgnoreCase(pageable, name).map { it.toResponse() }
+            return verifyIfPageHasUsers(pageResponse)
         }
-        return userRepository.findAll(pageable).map { it.toResponse() }
+        val pageResponse = userRepository.findAll(pageable).map { it.toResponse() }
+        return verifyIfPageHasUsers(pageResponse)
     }
+
 
     fun create(user: PostUserRequest) {
         user.password = passwordEncoder.encode(user.password)
@@ -34,8 +38,8 @@ class UserService(
     fun getById(id: Int): UserResponse {
         return userRepository.findById(id).orElseThrow {
             NotFoundException(
-                InternalErrorCodes.USER_NOT_FOUND.message.format(id),
-                InternalErrorCodes.USER_NOT_FOUND.code
+                InternalErrorCodes.LK_101.message.format(id),
+                InternalErrorCodes.LK_101.code
             )
         }.toResponse()
     }
@@ -43,8 +47,8 @@ class UserService(
     fun update(id: Int, user: PutUserRequest) {
         val userSaved = userRepository.findById(id).orElseThrow {
             NotFoundException(
-                InternalErrorCodes.USER_NOT_FOUND.message.format(id),
-                InternalErrorCodes.USER_NOT_FOUND.code
+                InternalErrorCodes.LK_101.message.format(id),
+                InternalErrorCodes.LK_101.code
             )
         }
         userRepository.save(user.toUserModel(userSaved))
@@ -55,9 +59,16 @@ class UserService(
             true -> userRepository.deleteById(id)
 
             else -> throw NotFoundException(
-                InternalErrorCodes.USER_NOT_FOUND.message.format(id),
-                InternalErrorCodes.USER_NOT_FOUND.code
+                InternalErrorCodes.LK_101.message.format(id),
+                InternalErrorCodes.LK_101.code
             )
+        }
+    }
+
+    private fun verifyIfPageHasUsers(pageResponse: Page<UserResponse>): Page<UserResponse> {
+        when (pageResponse.content.isEmpty()) {
+            true -> throw NotFoundException(InternalErrorCodes.LK_102.message, InternalErrorCodes.LK_102.code)
+            false -> return pageResponse
         }
     }
 

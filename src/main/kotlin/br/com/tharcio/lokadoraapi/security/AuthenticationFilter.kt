@@ -2,7 +2,6 @@ package br.com.tharcio.lokadoraapi.security
 
 import br.com.tharcio.lokadoraapi.daos.request.LoginRequest
 import br.com.tharcio.lokadoraapi.repositories.UserRepository
-import br.com.tharcio.lokadoraapi.services.UserService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
