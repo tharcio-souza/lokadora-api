@@ -3,9 +3,10 @@ package br.com.tharcio.lokadoraapi.services
 import br.com.tharcio.lokadoraapi.daos.request.PostUserRequest
 import br.com.tharcio.lokadoraapi.daos.request.PutUserRequest
 import br.com.tharcio.lokadoraapi.daos.response.UserResponse
+import br.com.tharcio.lokadoraapi.enums.InternalErrorCodes
+import br.com.tharcio.lokadoraapi.exceptions.NotFoundException
 import br.com.tharcio.lokadoraapi.extensions.toResponse
 import br.com.tharcio.lokadoraapi.extensions.toUserModel
-import br.com.tharcio.lokadoraapi.models.UserModel
 import br.com.tharcio.lokadoraapi.repositories.UserRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -31,11 +32,21 @@ class UserService(
     }
 
     fun getById(id: Int): UserResponse {
-        return userRepository.findById(id).orElseThrow { Exception() }.toResponse()
+        return userRepository.findById(id).orElseThrow {
+            NotFoundException(
+                InternalErrorCodes.USER_NOT_FOUND.message.format(id),
+                InternalErrorCodes.USER_NOT_FOUND.code
+            )
+        }.toResponse()
     }
 
     fun update(id: Int, user: PutUserRequest) {
-        val userSaved = userRepository.findById(id).orElseThrow { Exception() }
+        val userSaved = userRepository.findById(id).orElseThrow {
+            NotFoundException(
+                InternalErrorCodes.USER_NOT_FOUND.message.format(id),
+                InternalErrorCodes.USER_NOT_FOUND.code
+            )
+        }
         userRepository.save(user.toUserModel(userSaved))
     }
 
@@ -43,7 +54,10 @@ class UserService(
         when (userRepository.existsById(id)) {
             true -> userRepository.deleteById(id)
 
-            else -> throw Exception()
+            else -> throw NotFoundException(
+                InternalErrorCodes.USER_NOT_FOUND.message.format(id),
+                InternalErrorCodes.USER_NOT_FOUND.code
+            )
         }
     }
 
