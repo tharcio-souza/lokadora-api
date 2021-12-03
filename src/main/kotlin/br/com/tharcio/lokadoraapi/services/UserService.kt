@@ -72,5 +72,9 @@ class UserService(
         }
     }
 
+    fun emailIsAvaible(value: String): Boolean {
+        return !userRepository.existsByEmail(value)
+    }
+
 
 }

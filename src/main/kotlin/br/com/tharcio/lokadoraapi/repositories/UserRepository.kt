@@ -9,4 +9,6 @@ import java.util.*
 interface UserRepository: JpaRepository<UserModel, Int> {
     fun findByNameContainingIgnoreCase(pageable: Pageable, name: String) : Page<UserModel>
     fun findByEmail(email: String): Optional<UserModel>
+    fun existsByEmail(value: String): Boolean
+
 }
