@@ -16,7 +16,6 @@ fun <T> Page<T>.toPageResponse(): PageResponse<T> {
         totalPages = this.totalPages,
         totalElements = this.totalElements
     )
-
 }
 
 fun UserModel.toResponse(): UserResponse {
