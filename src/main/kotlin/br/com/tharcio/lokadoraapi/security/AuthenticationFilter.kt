@@ -1,7 +1,7 @@
 package br.com.tharcio.lokadoraapi.security
 
-import br.com.tharcio.lokadoraapi.daos.request.LoginRequest
-import br.com.tharcio.lokadoraapi.repositories.UserRepository
+import br.com.tharcio.lokadoraapi.dtos.request.LoginRequest
+import br.com.tharcio.lokadoraapi.repositories.UserDAO
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse
 
 class AuthenticationFilter(
     authenticationManager: AuthenticationManager,
-    private val userRepository: UserRepository,
+    private val userRepository: UserDAO,
     private val jwtUtil: JwtUtil
 
 ) : UsernamePasswordAuthenticationFilter(authenticationManager) {

@@ -1,4 +1,4 @@
-package br.com.tharcio.lokadoraapi.daos.response
+package br.com.tharcio.lokadoraapi.dtos.response
 
 data class FieldErrorResponse (
     var message: String,

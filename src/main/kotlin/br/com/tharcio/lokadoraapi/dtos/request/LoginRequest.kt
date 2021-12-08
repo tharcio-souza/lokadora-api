@@ -1,4 +1,4 @@
-package br.com.tharcio.lokadoraapi.daos.request
+package br.com.tharcio.lokadoraapi.dtos.request
 
 data class LoginRequest (
     val email: String,

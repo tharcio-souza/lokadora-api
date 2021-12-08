@@ -1,4 +1,4 @@
-package br.com.tharcio.lokadoraapi.daos.request
+package br.com.tharcio.lokadoraapi.dtos.request
 
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotEmpty

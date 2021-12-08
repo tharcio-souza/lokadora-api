@@ -1,7 +1,7 @@
 package br.com.tharcio.lokadoraapi.exceptions
 
-import br.com.tharcio.lokadoraapi.daos.response.ErrorResponse
-import br.com.tharcio.lokadoraapi.daos.response.FieldErrorResponse
+import br.com.tharcio.lokadoraapi.dtos.response.ErrorResponse
+import br.com.tharcio.lokadoraapi.dtos.response.FieldErrorResponse
 import br.com.tharcio.lokadoraapi.enums.InternalErrorCodes
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

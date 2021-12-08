@@ -1,11 +1,11 @@
 package br.com.tharcio.lokadoraapi.extensions
 
-import br.com.tharcio.lokadoraapi.daos.request.PostUserRequest
-import br.com.tharcio.lokadoraapi.daos.request.PutUserRequest
-import br.com.tharcio.lokadoraapi.daos.response.PageResponse
-import br.com.tharcio.lokadoraapi.daos.response.UserResponse
+import br.com.tharcio.lokadoraapi.dtos.request.PostUserRequest
+import br.com.tharcio.lokadoraapi.dtos.request.PutUserRequest
+import br.com.tharcio.lokadoraapi.dtos.response.PageResponse
+import br.com.tharcio.lokadoraapi.dtos.response.UserResponse
 import br.com.tharcio.lokadoraapi.enums.Roles
-import br.com.tharcio.lokadoraapi.models.UserModel
+import br.com.tharcio.lokadoraapi.entities.User
 import org.springframework.data.domain.Page
 
 fun <T> Page<T>.toPageResponse(): PageResponse<T> {
@@ -18,7 +18,7 @@ fun <T> Page<T>.toPageResponse(): PageResponse<T> {
     )
 }
 
-fun UserModel.toResponse(): UserResponse {
+fun User.toResponse(): UserResponse {
     return UserResponse(
         id = this.id,
         name = this.name,
@@ -27,8 +27,8 @@ fun UserModel.toResponse(): UserResponse {
     )
 }
 
-fun PostUserRequest.toUserModel(): UserModel {
-    return UserModel(
+fun PostUserRequest.toUserModel(): User {
+    return User(
         name = this.name,
         email = this.email,
         password = this.password,
@@ -36,8 +36,8 @@ fun PostUserRequest.toUserModel(): UserModel {
     )
 }
 
-fun PutUserRequest.toUserModel(user: UserModel): UserModel {
-    return UserModel(
+fun PutUserRequest.toUserModel(user: User): User {
+    return User(
         id = user.id,
         name = this.name,
         email = this.email,

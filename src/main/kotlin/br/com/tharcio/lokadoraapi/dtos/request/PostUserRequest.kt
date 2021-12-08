@@ -1,4 +1,4 @@
-package br.com.tharcio.lokadoraapi.daos.request
+package br.com.tharcio.lokadoraapi.dtos.request
 
 import br.com.tharcio.lokadoraapi.validation.EmailAvaible
 import javax.validation.constraints.Email

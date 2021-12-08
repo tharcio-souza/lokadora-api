@@ -1,4 +1,4 @@
-package br.com.tharcio.lokadoraapi.models
+package br.com.tharcio.lokadoraapi.entities
 
 
 import br.com.tharcio.lokadoraapi.enums.Roles
@@ -6,19 +6,18 @@ import javax.persistence.*
 
 
 @Entity(name = "users")
-data class UserModel(
+class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
 
-    @Column
+    @Column(name = "name")
     var name: String,
 
-    @Column
+    @Column(name = "email")
     var email: String,
 
-    @Column
-
+    @Column(name = "password")
     var password: String,
 
     @Column(name = "role")
@@ -26,5 +25,6 @@ data class UserModel(
     @ElementCollection(targetClass = Roles::class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = [JoinColumn(name = "user_id")])
     var roles: Set<Roles>
-
 )
+
+

@@ -1,10 +1,10 @@
 package br.com.tharcio.lokadoraapi.configurations
 
-import br.com.tharcio.lokadoraapi.repositories.UserRepository
+import br.com.tharcio.lokadoraapi.repositories.UserDAO
 import br.com.tharcio.lokadoraapi.security.AuthenticationFilter
 import br.com.tharcio.lokadoraapi.security.AuthorizationFilter
 import br.com.tharcio.lokadoraapi.security.JwtUtil
-import br.com.tharcio.lokadoraapi.services.UserDetailsCustomService
+import br.com.tharcio.lokadoraapi.services.impl.UserDetailsCustomService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -18,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 @Configuration
 @EnableWebSecurity
 class SecurityConfiguration(
-    private val userRepository: UserRepository,
+    private val userDAO: UserDAO,
     private val userDetailsCustomService: UserDetailsCustomService,
     private val jwtUtil: JwtUtil
 ) : WebSecurityConfigurerAdapter() {
@@ -32,7 +32,7 @@ class SecurityConfiguration(
 
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/users").permitAll().anyRequest().authenticated()
 
-        http.addFilter(AuthenticationFilter(authenticationManager(), userRepository, jwtUtil))
+        http.addFilter(AuthenticationFilter(authenticationManager(), userDAO, jwtUtil))
 
         http.addFilter((AuthorizationFilter(authenticationManager(), userDetailsCustomService, jwtUtil)))
 

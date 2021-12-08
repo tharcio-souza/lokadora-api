@@ -1,6 +1,6 @@
 package br.com.tharcio.lokadoraapi.security
 
-import br.com.tharcio.lokadoraapi.services.UserDetailsCustomService
+import br.com.tharcio.lokadoraapi.services.impl.UserDetailsCustomService
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder

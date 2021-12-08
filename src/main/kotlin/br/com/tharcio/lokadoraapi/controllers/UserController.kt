@@ -1,11 +1,11 @@
 package br.com.tharcio.lokadoraapi.controllers
 
-import br.com.tharcio.lokadoraapi.daos.request.PostUserRequest
-import br.com.tharcio.lokadoraapi.daos.request.PutUserRequest
-import br.com.tharcio.lokadoraapi.daos.response.PageResponse
-import br.com.tharcio.lokadoraapi.daos.response.UserResponse
+import br.com.tharcio.lokadoraapi.dtos.request.PostUserRequest
+import br.com.tharcio.lokadoraapi.dtos.request.PutUserRequest
+import br.com.tharcio.lokadoraapi.dtos.response.PageResponse
+import br.com.tharcio.lokadoraapi.dtos.response.UserResponse
 import br.com.tharcio.lokadoraapi.extensions.toPageResponse
-import br.com.tharcio.lokadoraapi.services.UserService
+import br.com.tharcio.lokadoraapi.services.impl.UserServiceImpl
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
@@ -15,7 +15,7 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("users")
 class UserController(
-    private val userService: UserService
+    private val userService: UserServiceImpl
 ) {
 
     @GetMapping
